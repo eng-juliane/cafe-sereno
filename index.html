@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Sereno - Café Artesanal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            color: #4B2E05;
+            background-color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        header {
+            background-color: #4B2E05;
+            color: #EED9B7;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+             position: fixed;         /* 🔹 Mantém o menu fixo na tela */
+    top: 0;                  /* 🔹 Posiciona no topo */
+    left: 0;
+    width: 97%;             /* 🔹 Ocupa toda a largura */
+    z-index: 1000; 
+        }
+        header .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: #EED9B7;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #fff;
+        }
+        .section {
+            padding: 60px 20px;
+            max-width: 1800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .banner {
+            background: linear-gradient(rgba(75, 46, 5, 0.7), rgba(238, 217, 183, 0.7)), url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+            padding: 220px 20px;
+           
+        }
+        .banner h1 {
+            font-size: 48px;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .banner p {
+            font-size: 20px;
+            margin: 20px 0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        .story {
+            background-color: #EED9B7;
+            padding: 100px;
+            text-align: center;
+        }
+        .story h2 {
+            color: #4B2E05;
+        }
+        .products {
+            background-color: #fff;
+            padding: 100px;
+        }
+        .products .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .product-item {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .product-item:hover {
+            transform: translateY(-5px);
+        }
+        .product-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-item h3 {
+            margin: 15px 0 10px;
+            color: #4B2E05;
+        }
+        .product-item p {
+            color: #666;
+            padding: 0 15px 15px;
+        }
+        .testimonials {
+            background-color: #4B2E05;
+            color: #EED9B7;
+            padding: 100px;
+            border-radius: 15px;
+           
+        }
+        .testimonials .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .testimonial-item {
+            background-color: rgba(238, 217, 183, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #EED9B7;
+        }
+        .testimonial-item p {
+            font-style: italic;
+        }
+        .testimonial-item cite {
+            font-weight: bold;
+            color: #EED9B7;
+        }
+        .buy-now {
+            background-color: #EED9B7;
+            text-align: center;
+            padding: 40px; 
+            margin-top: 20px;
+            margin-bottom: 20px;
+          
+        }
+        .buy-now button {
+            background-color: #4B2E05;
+            color: #EED9B7;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .buy-now button:hover {
+            background-color: #3A2304;
+        }
+        footer {
+            background-color: #4B2E05;
+            color: #EED9B7;
+            text-align: center;
+            padding: 20px;
+        }
+        footer a {
+            color: #EED9B7;
+            text-decoration: none;
+        }
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .banner h1 {
+                font-size: 36px;
+            }
+            .banner p {
+                font-size: 18px;
+            }
+            .products .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .testimonials .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 15px;
+            }
+            .logo {
+                font-size: 24px;
+            }
+            .banner {
+                padding: 80px 10px;
+            }
+            .banner h1 {
+                font-size: 28px;
+            }
+            .section {
+                padding: 40px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Café Sereno</div>
+        <nav>
+            <ul>
+                <li><a href="#story">História</a></li>
+                <li><a href="#products">Produtos</a></li>
+                <li><a href="#testimonials">Depoimentos</a></li>
+                <li><a href="#buy-now">Comprar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="section banner visible">
+        <h1>Sabor que desperta seus sentidos.</h1>
+        <p>Café Sereno é um blend artesanal torrado lentamente para preservar o aroma e o sabor que tornam cada manhã especial.</p>
+    </section>
+
+    <section id="story" class="section story">
+        <h2>História do Café Artesanal</h2>
+        <p>Nossa jornada começou em uma pequena fazenda familiar, onde o amor pela terra e pela tradição se uniu à paixão pelo café perfeito. Cada grão é selecionado à mão, torrado lentamente para realçar sabores únicos e aromas irresistíveis. Venha descobrir o que torna o Café Sereno especial.</p>
+    </section>
+
+    <section id="products" class="section products">
+        <h2>Fotos do Produto e Produção</h2>
+        <div class="product-grid">
+            <div class="product-item">
+                <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Café em Grãos">
+                <h3>Café em Grãos 500g</h3>
+                <p>Blend artesanal torrado lentamente. R$ 25,00</p>
+            </div>
+            <div class="product-item">
+                <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Café Moído">
+                <h3>Café Moído 250g</h3>
+                <p>Prontinho para sua cafeteira. R$ 15,00</p>
+            </div>
+            <div class="product-item">
+                <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Kit Degustação">
+                <h3>Kit Degustação</h3>
+                <p>3 blends exclusivos. R$ 40,00</p>
+            </div>
+            <div class="product-item">
+                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Produção Artesanal">
+                <h3>Produção Artesanal</h3>
+                <p>Veja como fazemos nosso café.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="section testimonials">
+        <h2>Depoimentos de Clientes</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-item">
+                <p>"O Café Sereno transforma minha manhã em um ritual delicioso. Aroma incrível!"</p>
+                <cite>- Eva Carvalho </cite>
+            </div>
+            <div class="testimonial-item">
+                <p>"Nunca provei um café tão suave e rico. Recomendo a todos os amantes de café."</p>
+                <cite>- Samuel Nascimento</cite>
+            </div>
+            <div class="testimonial-item">
+                <p>"A qualidade artesanal é evidente em cada xícara. Meu favorito absoluto."</p>
+                <cite>- Carla Pena</cite>
+            </div>
+        </div>
+    </section>
+
+    <section id="buy-now" class="section buy-now">
+        <h2>Compre Agora</h2>
+        <p>Leve o sabor artesanal para casa. Clique abaixo para ir ao checkout.</p>
+        <button onclick="alert('Redirecionando para checkout...')">Compre Agora</button>
+    </section>
+
+    <footer>
+        <p>Contato: contato@cafesereno.com | Telefone: (11) 99999-9999</p>
+        <p>&copy; 2023 Café Sereno. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Animação de scroll
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
